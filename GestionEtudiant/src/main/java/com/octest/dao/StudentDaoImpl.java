@@ -2,12 +2,13 @@ package com.octest.dao;
 
 import com.octest.beans.Student;
 import com.octest.config.Connection;
+import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+@Repository
 public class StudentDaoImpl implements StudentDao{
 
     @Override

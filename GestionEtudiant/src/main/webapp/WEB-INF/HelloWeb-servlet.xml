@@ -12,7 +12,7 @@
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!-- FIXME Changez le nom du package en votre package de base -->
-    <context:component-scan base-package="com.octest.controllers"/>
+    <context:component-scan base-package="com.octest"/>
     <mvc:annotation-driven/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

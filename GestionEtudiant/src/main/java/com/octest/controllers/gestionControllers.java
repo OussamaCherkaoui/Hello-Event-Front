@@ -1,7 +1,9 @@
 package com.octest.controllers;
 
 import com.octest.beans.Student;
+import com.octest.dao.StudentDao;
 import com.octest.dao.StudentDaoImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +14,13 @@ import java.sql.SQLException;
 
 @Controller
 public class gestionControllers {
-    StudentDaoImpl studentDao = new StudentDaoImpl();
+
+    private final StudentDao studentDao ;
+
+    public gestionControllers(StudentDao studentDao) {
+        this.studentDao = studentDao;
+    }
+
 
     @RequestMapping(value = "/", method = RequestMethod. GET )
     public String doGetHome(ModelMap modelMap) throws SQLException, ClassNotFoundException {
