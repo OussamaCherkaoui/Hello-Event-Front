@@ -22,10 +22,7 @@ git clone https://github.com/OussamaCherkaoui/gestionEtudiants.git
 2. Importer le projet dans votre IDE préféré.
 3. Configurer les paramètres de la base de données dans le fichier `application.properties`.
 4. Exécuter l'application.
-
-## Capture d'écran
-
-![Capture d'écran](screenshot.png)
+   
 
 ## Auteur
 
