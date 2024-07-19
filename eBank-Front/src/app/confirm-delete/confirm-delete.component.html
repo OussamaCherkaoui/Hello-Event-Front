@@ -1,0 +1,15 @@
+<div class="modal-header">
+  <h4 class="modal-title">Confirmer la fermeture</h4>
+</div>
+<div class="modal-body">
+  <form #f="ngForm">
+    <div class="form-group">
+      <label for="raison">Raison de la fermeture</label>
+      <textarea id="raison" class="form-control" [(ngModel)]="raison" name="raison" required></textarea>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss('Cancel click')">Annuler</button>
+  <button type="button" class="btn btn-danger" (click)="confirmerSuppression()">Supprimer</button>
+</div>

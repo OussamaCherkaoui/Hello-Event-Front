@@ -1,0 +1,23 @@
+<div class="container mt-5">
+  <h2 class="mb-4">Formulaire d'Ouverture de Compte</h2>
+  <form (ngSubmit)="ouvrirCompte()" #compteForm="ngForm">
+    <div class="form-group">
+      <label for="motDePasse">Mot de Passe</label>
+      <input type="password" class="form-control" id="motDePasse" name="motDePasse" placeholder="Entrez votre mot de passe" [(ngModel)]="account.motDePass" required>
+    </div>
+    <div class="form-group">
+      <label for="solde">Solde</label>
+      <input type="number" class="form-control" id="solde" name="solde" placeholder="Entrez le solde" [(ngModel)]="account.solde" required>
+    </div>
+    <div class="form-group">
+      <label for="typeCompte">Type de Compte</label>
+      <select class="form-control" id="typeCompte" name="typeCompte" required [(ngModel)]="account.typeCompte">
+        <option value="" disabled selected>Sélectionnez un type de compte</option>
+        <option value="courant">Courant</option>
+        <option value="epargne">Épargne</option>
+        <option value="joint">Joint</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Soumettre</button>
+  </form>
+</div>
