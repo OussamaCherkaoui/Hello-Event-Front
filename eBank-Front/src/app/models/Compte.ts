@@ -1,5 +1,7 @@
 import {Carte} from "./Carte";
 import {Beneficiaire} from "./Beneficiaire";
+import {Banque} from "./Banque";
+import {User} from "./User";
 
 export class Compte {
   numeroCompte?: String;
@@ -8,7 +10,8 @@ export class Compte {
   dateOuverture: string | undefined;
   motDePass: number|undefined;
   estFerme: boolean|undefined;
-  idBanque?:number;
+  user?: User;
+  banque?: Banque;
   cartes ?: [Carte];
   beneficiaires?:[Beneficiaire];
 
@@ -21,7 +24,8 @@ export class Compte {
       this.dateOuverture = data.dateOuverture;
       this.motDePass = data.motDePass;
       this.estFerme = data.estFerme;
-      this.idBanque=data.idBanque;
+      this.user=data.user;
+      this.banque=data.banque;
     }
   }
 }
