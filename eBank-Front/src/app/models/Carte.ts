@@ -1,8 +1,8 @@
 import {Transaction} from "./Transaction";
 
 export class Carte {
-  numeroCarte?: String;
-  codePin: Number | undefined;
+  numeroCarte?: string;
+  codePin: number | undefined;
   solde: number | undefined;
   dateExpiration: string | undefined;
   typeCarte: string|undefined;

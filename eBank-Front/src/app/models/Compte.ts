@@ -4,14 +4,14 @@ import {Banque} from "./Banque";
 import {User} from "./User";
 
 export class Compte {
-  numeroCompte?: String;
+  numeroCompte?: string;
   typeCompte: string | undefined;
   solde: number | undefined;
   dateOuverture: string | undefined;
   motDePass: number|undefined;
   estFerme: boolean|undefined;
-  user?: User;
-  banque?: Banque;
+  user_id: number|undefined;
+  idBanque: number|undefined;
   cartes ?: [Carte];
   beneficiaires?:[Beneficiaire];
 
@@ -24,8 +24,8 @@ export class Compte {
       this.dateOuverture = data.dateOuverture;
       this.motDePass = data.motDePass;
       this.estFerme = data.estFerme;
-      this.user=data.user;
-      this.banque=data.banque;
+      this.user_id=data.user_id;
+      this.idBanque=data.idBanque;
     }
   }
 }

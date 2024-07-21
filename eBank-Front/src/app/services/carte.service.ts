@@ -31,7 +31,10 @@ export class CarteService {
     return this.http.get<number>(`${this.apiUrl}/getPin/${numeroCarte}`,{});
   }
   public connectCart(numeroCarte: string,codePin: number): Observable<Carte> {
-    return this.http.get<Carte>(`${this.apiUrl}/connectCart/${numeroCarte}/${codePin}`,{});
+    return this.http.get<Carte>(`${this.apiUrl}/connectCart/${numeroCarte}/${codePin}`);
   }
 
+  public getCartes(numeroCompte:string):Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/getAllCarte/${numeroCompte}`,{});
+  }
 }

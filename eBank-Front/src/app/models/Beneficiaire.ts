@@ -1,7 +1,7 @@
 export class Beneficiaire {
   idBenificiaire?: number;
   numeroCompte: string | undefined;
-  numeroCompteBeneficiaire: String | undefined;
+  numeroCompteBeneficiaire: string | undefined;
 
 
 

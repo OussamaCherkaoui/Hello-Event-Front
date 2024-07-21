@@ -18,6 +18,9 @@
         <option value="joint">Joint</option>
       </select>
     </div>
+    <div *ngIf="message" class="error-message fw-bold" style="color:royalblue;">
+      {{ message }}
+    </div>
     <button type="submit" class="btn btn-primary">Soumettre</button>
   </form>
 </div>

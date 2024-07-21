@@ -19,29 +19,20 @@ export class CompteService {
     return this.http.post<any>(`${this.apiUrl}/signUpCompte`,compte);
   }
   public logInCompte(numeroCompte: string, mot_de_pass: number | undefined): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/logInCompte/${numeroCompte}/${mot_de_pass}`).pipe(
-      catchError(this.gererErreur)
-    );
+    return this.http.get<any>(`${this.apiUrl}/logInCompte/${numeroCompte}/${mot_de_pass}`);
   }
 
-  private gererErreur(error: HttpErrorResponse) {
-    let errorMessage = 'Une erreur inconnue s\'est produite';
-    if (error.status === 404) {
-      errorMessage = 'Compte non trouvé';
-    } else if (error.status === 401) {
-      errorMessage = 'Mot de passe incorrect';
-    }
-    return throwError(() => new Error(errorMessage));
+  public fermeCompte(numeroCompte: string | undefined, raison: string | undefined): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/fermeCompte/${numeroCompte}/${raison}`,{});
   }
-
-  public fermeCompte(numeroCompte: string | undefined, raison: string | undefined): Observable<CompteFerme> {
-    return this.http.post<CompteFerme>(`${this.apiUrl}/fermeCompte/${numeroCompte}/${raison}`,{});
-  }
-  public ajouterBeneficiaire(numeroCompte: string,numeroCompteBeneficiaire: string): Observable<Beneficiaire> {
+  public ajouterBeneficiaire(numeroCompte: string,numeroCompteBeneficiaire: string|undefined): Observable<Beneficiaire> {
     return this.http.post<Beneficiaire>(`${this.apiUrl}/ajouterBeneficiaire/${numeroCompte}/${numeroCompteBeneficiaire}`,{});
   }
-  public supprimerBeneficiaire(numeroCompte: string,numeroCompteBeneficiaire: string): Observable<Beneficiaire> {
+  public supprimerBeneficiaire(numeroCompte: string, numeroCompteBeneficiaire: string | undefined): Observable<Beneficiaire> {
     return this.http.delete<Beneficiaire>(`${this.apiUrl}/supprimerBeneficiaire/${numeroCompte}/${numeroCompteBeneficiaire}`,{});
   }
-
+  public getAllBeneficiairesByNumeroCompte(numeroCompte: string): Observable<any>
+  {
+    return this.http.get<any>(`${this.apiUrl}/getAllBeneficiaire/${numeroCompte}`);
+  }
 }

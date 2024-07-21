@@ -17,26 +17,33 @@ import {NgIf} from "@angular/common";
 })
 export class OuvrirCompteComponent implements OnInit{
 
+  account : Compte= {
+    dateOuverture: undefined,
+    estFerme: undefined,
+    idBanque: undefined,
+    motDePass: undefined,
+    solde: undefined,
+    typeCompte: undefined,
+    user_id: undefined
+  };
+  public message: string ="";
   constructor(
     private compteService: CompteService,
     private router: Router
   ) {}
 
-  public account = {
-    typeCompte: '',
-    solde: null,
-    motDePass: null,
-    user: {
-      user_id:1
-    },
-    banque: {
-      idBanque:5
-    }
-  }
 
   ouvrirCompte(): void {
-
-    this.compteService.ouvrirCompte(this.account).subscribe(() => {
+    this.account.user_id=1;
+    this.account.idBanque=5;
+    this.compteService.ouvrirCompte(this.account).subscribe((compte) => {
+      if (compte)
+      {
+        this.message="le compte est ouvrit avec succées";
+      }
+      else {
+        this.message="le compte n' était pas ouvrit !! contactez nous pour plus d' information";
+      }
     });
   }
 

@@ -1,12 +1,12 @@
 export class Transaction {
   idTransaction?: number;
   montant: number | undefined;
-  dateTransaction: String | undefined;
+  dateTransaction: string | undefined;
   typeTransaction: string | undefined;
   description: number|undefined;
   estFerme: boolean|undefined;
-  numeroCarte?: String;
-  numeroCompte?: String;
+  numeroCarte?: string;
+  numeroCompte?: string;
 
 
   constructor(data?: Partial<Transaction>) {

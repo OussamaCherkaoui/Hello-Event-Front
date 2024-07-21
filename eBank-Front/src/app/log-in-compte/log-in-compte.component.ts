@@ -27,15 +27,11 @@ export class LogInCompteComponent implements OnInit{
 
   logInCompte(){
     this.compteService.logInCompte(this.numeroCompte,this.motDePass).subscribe(
-      (compte)=>{
-        if (compte) {
-          this.router.navigate(['/compte']);
-        } else {
-          this.errorMessage = 'Numéro de compte ou mot de passe incorrect.';
-        }
+      (compte):any=> {
+        this.router.navigate(['/compte']);
       },
-      (error) => {
-        this.errorMessage = error.message;
+      (error)=>{
+        this.errorMessage = 'mot de passe incorrect.';
       }
     );
   }
