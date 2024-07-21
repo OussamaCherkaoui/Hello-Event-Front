@@ -1,18 +1,18 @@
 export class Transaction {
   idTransaction?: number;
-  montant: number | undefined;
+  montant!: number;
   dateTransaction: string | undefined;
   typeTransaction: string | undefined;
-  description: number|undefined;
+  description: string|undefined;
   estFerme: boolean|undefined;
-  numeroCarte?: string;
-  numeroCompte?: string;
+  numeroCarte: string|undefined;
+  numeroCompte: string|undefined;
 
 
   constructor(data?: Partial<Transaction>) {
     if (data) {
       this.idTransaction = data.idTransaction;
-      this.montant = data.montant;
+      this.montant = 0;
       this.dateTransaction = data.dateTransaction;
       this.typeTransaction = data.typeTransaction;
       this.description = data.description;

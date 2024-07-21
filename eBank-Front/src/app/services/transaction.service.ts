@@ -17,7 +17,7 @@ export class TransactionService {
   public effectuerTransaction(transaction: Transaction): Observable<Transaction> {
     return this.http.post<Transaction>(`${this.apiUrl}`,transaction);
   }
-  public getAllTransactionByNumeroCompte(numeroCompte: string): Observable<Transaction[]> {
-    return this.http.post<Transaction[]>(`${this.apiUrl}/getAllByNumeroCompte/${numeroCompte}`, {});
+  public getTransactionsByNumeroCarte(numeroCarte: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/getAllTransaction/${numeroCarte}`);
   }
 }

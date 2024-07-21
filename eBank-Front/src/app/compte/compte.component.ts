@@ -5,11 +5,12 @@ import {Router} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ConfirmDeleteComponent} from "../confirm-delete/confirm-delete.component";
 import {FormsModule} from "@angular/forms";
-import {NgForOf, NgIf} from "@angular/common";
+import {NgClass, NgForOf, NgIf, NgStyle} from "@angular/common";
 import {Beneficiaire} from "../models/Beneficiaire";
 import {Carte} from "../models/Carte";
 import {CarteService} from "../services/carte.service";
 import {LoginCartComponent} from "../login-cart/login-cart.component";
+import {FormBloquageCartComponent} from "../form-bloquage-cart/form-bloquage-cart.component";
 
 @Component({
   selector: 'app-compte',
@@ -18,7 +19,10 @@ import {LoginCartComponent} from "../login-cart/login-cart.component";
     FormsModule,
     NgIf,
     NgForOf,
-    LoginCartComponent
+    LoginCartComponent,
+    NgClass,
+    NgStyle,
+    FormBloquageCartComponent
   ],
   templateUrl: './compte.component.html',
   styleUrl: './compte.component.css'
@@ -30,8 +34,15 @@ export class CompteComponent implements OnInit  {
   beneficiaries: Beneficiaire[]=[];
   cartes: Carte[]=[];
   showModal = false;
-  selectedNumeroCarte: string='' ;
+  selectedNumeroCarte: string ='' ;
+  messageBloquageCart:string='';
   messageConnectCart!:string;
+  messageAjoutCart!:string;
+  typeCarteAdd: string = '';
+  typesDeCarte: string[] = ['Débit', 'Crédit', 'Prépayée', 'Virtuelle'];
+  showModalBlocage: boolean = false;
+  raisonBlocage: string = '';
+
 
   constructor(
     private modalService: NgbModal,
@@ -103,5 +114,62 @@ export class CompteComponent implements OnInit  {
         this.messageConnectCart="Code Pin Incorrect";
       }
     });
+  }
+
+  changeEtat(carte: Carte) {
+    if (carte.etat==='activer')
+    {
+      this.carteService.desactiverCart(carte.numeroCarte).subscribe(activer=>{
+        if (activer)
+        {
+          this.ngOnInit();
+        }
+      });
+    }
+    else{
+      this.carteService.activerCart(carte.numeroCarte).subscribe(activer=>{
+        if (activer)
+        {
+          this.ngOnInit();
+        }
+      });
+    }
+  }
+
+  creerCarte() {
+    this.carteService.creerCart(this.numeroCompte,this.typeCarteAdd).subscribe((cart) => {
+      if (cart)
+      {
+        this.ngOnInit();
+        this.messageAjoutCart="la cart est créer avec succées";
+        this.carteService.getPinCart(cart.numeroCarte).subscribe((pinCart) => {
+        alert('Code Pin : '+ pinCart);
+        });
+      }
+      else {
+        this.messageAjoutCart="la cart n' était pas créer !! contactez nous pour plus d' information";
+      }
+    });
+  }
+
+  ouvrirModalBlocage(numeroCarte: string): void {
+    this.selectedNumeroCarte = numeroCarte;
+    this.showModalBlocage = true;
+  }
+  fermerModalBlocage(): void {
+    this.raisonBlocage = '';
+    this.showModalBlocage = false;
+  }
+
+  bloquerCarte(event: { numeroCarte: string; raison: string }): void {
+    if (event.numeroCarte && event.raison) {
+      this.carteService.bloqueCart(event.numeroCarte,event.raison).subscribe((result) => {
+        if (result) {
+          console.log(`Carte ${this.selectedNumeroCarte} bloquée avec succès`);
+          this.fermerModalBlocage();
+          this.ngOnInit();
+        }
+      });
+    }
   }
 }

@@ -15,19 +15,19 @@ export class CarteService {
   constructor(private http: HttpClient) {
     this.apiUrl = 'http://localhost:8081/compte/cart';
   }
-  public creerCart(cart: Carte): Observable<Carte> {
-    return this.http.post<Carte>(`${this.apiUrl}/creerCart`,cart);
+  public creerCart(numeroCompte: string, typeCarteAdd: string): Observable<Carte> {
+    return this.http.post<Carte>(`${this.apiUrl}/creerCart/${numeroCompte}/${typeCarteAdd}`,{});
   }
-  public activerCart(numeroCarte: string): Observable<string> {
-    return this.http.post<string>(`${this.apiUrl}/activerCart/${numeroCarte}`,{});
+  public activerCart(numeroCarte: string|undefined): Observable<boolean> {
+    return this.http.post<boolean>(`${this.apiUrl}/activerCart/${numeroCarte}`,{});
   }
-  public desactiverCart(numeroCarte: string): Observable<string> {
-    return this.http.post<string>(`${this.apiUrl}/desactiverCart/${numeroCarte}`,{});
+  public desactiverCart(numeroCarte: string | undefined): Observable<boolean> {
+    return this.http.post<boolean>(`${this.apiUrl}/desactiverCart/${numeroCarte}`,{});
   }
   public bloqueCart(numeroCarte: string,raison: string): Observable<CarteBloque> {
     return this.http.post<CarteBloque>(`${this.apiUrl}/bloqueCart/${numeroCarte}/${raison}`,{});
   }
-  public getPinCart(numeroCarte: string): Observable<number> {
+  public getPinCart(numeroCarte: string | undefined): Observable<number> {
     return this.http.get<number>(`${this.apiUrl}/getPin/${numeroCarte}`,{});
   }
   public connectCart(numeroCarte: string,codePin: number): Observable<Carte> {
