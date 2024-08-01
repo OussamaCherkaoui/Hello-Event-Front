@@ -4,7 +4,7 @@ export class User {
   password: string|undefined;
   email: string|undefined;
   phone: string|undefined;
-  role: string|undefined;
+  role: number|undefined;
 
   constructor(data?: Partial<User>) {
     if (data) {

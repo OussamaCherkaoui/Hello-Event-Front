@@ -1,0 +1,40 @@
+<div class="search-filters">
+  <mat-form-field appearance="fill">
+    <mat-label>Date</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="searchDate" placeholder="Date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Catégorie</mat-label>
+    <input matInput [(ngModel)]="searchCategory" placeholder="Catégorie">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Emplacement</mat-label>
+    <input matInput [(ngModel)]="searchLocation" placeholder="Emplacement">
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="filterEvents()">
+    <mat-icon>search</mat-icon>
+    Rechercher
+  </button>
+</div>
+
+<div class="card-container">
+  <mat-card *ngFor="let event of events" class="event-card">
+    <mat-card-header>
+      <mat-card-title>{{ event.title }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p><strong>Description :</strong> {{ event.description }}</p>
+      <p><strong>Date :</strong> {{ event.date }}</p>
+      <p><strong>Catégorie :</strong> {{ event.category }}</p>
+      <p><strong>Emplacement :</strong> {{ event.location }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="reserveTicket(event.id)">Réserver</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
