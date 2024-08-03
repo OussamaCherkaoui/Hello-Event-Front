@@ -1,3 +1,8 @@
+<div class="welcome-section">
+  <p class="welcome-message">Bienvenue sur notre site ! Explorez nos événements passionnants et profitez de votre expérience.</p>
+  <img src="./assets/pictures/HelloPresentatation.png" alt="imgPresentationSite" class="site-image">
+</div>
+
 <div class="search-filters">
   <mat-form-field appearance="fill">
     <mat-label>Date</mat-label>
@@ -16,9 +21,12 @@
     <input matInput [(ngModel)]="searchLocation" placeholder="Emplacement">
   </mat-form-field>
 
-  <button mat-raised-button color="primary" (click)="filterEvents()">
+  <button mat-raised-button style="background-color: burlywood;margin-bottom: 25px" (click)="filterEvents()">
     <mat-icon>search</mat-icon>
     Rechercher
+  </button>
+  <button mat-raised-button style="background-color: burlywood;margin-bottom: 25px" (click)="getAll()">
+    Toutes les évenements
   </button>
 </div>
 
@@ -38,3 +46,5 @@
     </mat-card-actions>
   </mat-card>
 </div>
+
+

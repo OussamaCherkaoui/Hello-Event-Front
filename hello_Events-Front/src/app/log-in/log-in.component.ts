@@ -12,6 +12,7 @@ import {Router} from "@angular/router";
 import {DecodejwtService} from "../Services/decodejwt.service";
 import {User} from "../models/User";
 import {Role} from "../models/Role";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-log-in',
@@ -52,6 +53,7 @@ export class LogInComponent implements OnInit{
           localStorage.setItem("jwt", response.token);
           this.srvd.getIdByUsername(response.token).subscribe(
             id => {
+              this.authService.setIdUser(id);
               this.authService.getUserById(id).subscribe(res => {
                 this.user = res;
                 this.authService.loginActive();

@@ -12,17 +12,27 @@ export class AuthentificationService {
   private apiUrl: string;
   private apiUrlAdmin: string;
 
+  private idUser = new BehaviorSubject<number>(0);
+
+  public getIdUser(): Observable<number> {
+    return this.idUser.asObservable();
+  }
+
+  public setIdUser(id:number) {
+    this.idUser.next(id);
+  }
+
   private loggedIn = new BehaviorSubject<boolean>(!!localStorage.getItem('jwt'));
 
   get isLoggedIn() {
     return this.loggedIn.asObservable();
   }
 
-  loginActive() {
+  public loginActive() {
     this.loggedIn.next(true);
   }
 
-  logout() {
+  public logout() {
     localStorage.removeItem('jwt');
     this.loggedIn.next(false);
   }

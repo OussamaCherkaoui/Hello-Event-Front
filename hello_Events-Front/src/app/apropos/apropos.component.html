@@ -1,11 +1,14 @@
-<div class="team-container">
-  <mat-card *ngFor="let member of teamMembers" class="team-card">
-    <mat-card-header>
-      <mat-card-title>{{ member.name }}</mat-card-title>
-      <mat-card-subtitle>{{ member.role }}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p>{{ member.description }}</p>
-    </mat-card-content>
-  </mat-card>
+<div class="team-section">
+  <h2 class="team-title">Notre Équipe</h2>
+  <div class="team-container">
+    <mat-card *ngFor="let member of teamMembers" class="team-card">
+      <mat-card-header>
+        <mat-card-title>{{ member.name }}</mat-card-title>
+        <mat-card-subtitle>{{ member.role }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ member.description }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

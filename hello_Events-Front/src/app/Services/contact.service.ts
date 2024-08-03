@@ -28,7 +28,7 @@ export class ContactService {
   }
 
   public getAllContact():Observable<any> {
-    return this.http.get<any>(`${this.apiUrlAdmin}/getAll-contact`, { headers: this.getHeaders() });
+    return this.http.get<any>(`${this.apiUrlAdmin}/getAll-contact`);
   }
 
   public saveContact(contact:Contact): Observable<any> {

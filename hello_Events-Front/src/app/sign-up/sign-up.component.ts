@@ -29,6 +29,7 @@ export class SignUpComponent implements OnInit{
   user : User = {
     email: '', idUser: 0, password: '', phone: '', role: Role.CLIENT, username: ''
   }
+  message:  string = '';
 
   constructor(private fb: FormBuilder,private userService:AuthentificationService) {
     this.signUpForm = this.fb.group({
@@ -49,6 +50,7 @@ export class SignUpComponent implements OnInit{
       if (this.signUpForm.valid) {
         this.userService.register(this.user).subscribe(data=>{
           console.log(data);
+          this.message='Compte créer avec succées';
         });
       } else {
         console.log('Remplit toutes les champs !!');

@@ -19,6 +19,8 @@ import {TicketService} from "../Services/ticket.service";
 import {Ticket} from "../models/Ticket";
 import {Router} from "@angular/router";
 import {routes} from "../app.routes";
+import {LogInComponent} from "../log-in/log-in.component";
+import {AuthentificationService} from "../Services/authentification.service";
 
 @Component({
   selector: 'app-home',
@@ -42,7 +44,7 @@ import {routes} from "../app.routes";
 })
 export class HomeComponent implements OnInit{
   events: Event[]=[];
-  idUser:number=6;
+  idUser!:number;
   ticket : Ticket={
     event_id: 0, id: 0, purchaseDate: undefined, user_id: this.idUser
   };
@@ -53,10 +55,18 @@ export class HomeComponent implements OnInit{
   constructor(
     private eventService: EventService,
     private ticketService: TicketService,
+    private authService:AuthentificationService,
     private route:Router
   ) {}
 
   ngOnInit(): void {
+    this.authService.getIdUser().subscribe(
+      (userId) => {
+        this.idUser = userId;
+        console.log(userId);
+        console.log(this.idUser);
+      }
+    );
     this.GetEvents();
   }
 
@@ -65,8 +75,9 @@ export class HomeComponent implements OnInit{
     if (token)
     {
       this.ticket.event_id=id;
+      this.ticket.user_id=this.idUser;
       this.ticketService.saveTicket(this.ticket).subscribe(data=>{
-        console.log(data);
+        alert("ticket reservé pour vous !!")
       });
     }
     else{
@@ -88,7 +99,7 @@ export class HomeComponent implements OnInit{
   }
 
   filterEvents() {
-      if(this.searchDate!=null&&this.searchCategory==''&&this.searchLocation=='')
+    if(this.searchDate!=null&&this.searchCategory==''&&this.searchLocation=='')
       {
         const year = this.searchDate.getFullYear();
         const month = String(this.searchDate.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
@@ -111,5 +122,9 @@ export class HomeComponent implements OnInit{
           this.events = data;
         });
       }
+  }
+
+  getAll() {
+    this.GetEvents();
   }
 }
