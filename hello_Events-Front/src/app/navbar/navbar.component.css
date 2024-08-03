@@ -1,0 +1,14 @@
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+a[mat-button] {
+  color: white;
+  text-decoration: none;
+}
+
+button[mat-button] {
+  color: white;
+}

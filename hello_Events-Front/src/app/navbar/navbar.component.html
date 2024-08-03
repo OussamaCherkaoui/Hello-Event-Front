@@ -1,14 +1,13 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/">Hello Event</a>
+<mat-toolbar color="primary">
+  <div class="nav-content">
+    <a mat-button routerLink="/">Hello Event</a>
+    <a mat-button routerLink="/aPropos">à propos</a>
+    <div *ngIf="!isLoggedIn">
+      <a mat-button routerLink="/logIn">Se connecter</a>
+      <a mat-button routerLink="/signUp">S'inscrire</a>
+    </div>
+    <div *ngIf="isLoggedIn">
+      <button mat-button (click)="logout()">Se déconnecter</button>
+    </div>
   </div>
-  <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/aPropos">A propos</a>
-  </div>
-  <div class="">
-    <a class="navbar-brand" routerLink="/logIn">Se connecter</a>
-  </div>
-  <div class="">
-    <a class="navbar-brand" routerLink="/signUp">S' inscrire</a>
-  </div>
-</nav>
+</mat-toolbar>

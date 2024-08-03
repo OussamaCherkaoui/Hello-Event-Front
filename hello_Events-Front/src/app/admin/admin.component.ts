@@ -1,12 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {MatButton, MatButtonModule} from "@angular/material/button";
 import {
-  MatCard,
-  MatCardActions,
   MatCardContent,
   MatCardHeader,
   MatCardModule,
-  MatCardTitle
 } from "@angular/material/card";
 import {NgForOf, NgIf} from "@angular/common";
 import {MatInputModule} from "@angular/material/input";
@@ -63,7 +60,7 @@ export class AdminComponent implements OnInit{
   }
 
   GetEvents(){
-    this.eventService.getAllEvents().subscribe(data => {
+    this.eventService.getAllEventsAdmin().subscribe(data => {
       this.events = data;
     });
   }
@@ -88,6 +85,10 @@ export class AdminComponent implements OnInit{
   }
 
   deleteEvent(id: number | undefined) {
+
+  }
+
+  deleteUser(idUser: number | undefined) {
 
   }
 }

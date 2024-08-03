@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf} from "@angular/common";
-import {MatSlideToggleModule} from "@angular/material/slide-toggle";
-import {MatError, MatFormField, MatFormFieldModule, MatLabel} from "@angular/material/form-field";
-import {MatInput, MatInputModule} from "@angular/material/input";
-import {MatButton, MatButtonModule} from "@angular/material/button";
+import {MatError, MatFormFieldModule, MatLabel} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatButtonModule} from "@angular/material/button";
 import {User} from "../models/User";
 import {AuthentificationService} from "../Services/authentification.service";
+import {Role} from "../models/Role";
 
 @Component({
   selector: 'app-sign-up',
@@ -27,7 +27,7 @@ import {AuthentificationService} from "../Services/authentification.service";
 export class SignUpComponent implements OnInit{
   signUpForm: FormGroup;
   user : User = {
-    email: '', idUser: 0, password: '', phone: '', role: 0, username: ''
+    email: '', idUser: 0, password: '', phone: '', role: Role.CLIENT, username: ''
   }
 
   constructor(private fb: FormBuilder,private userService:AuthentificationService) {

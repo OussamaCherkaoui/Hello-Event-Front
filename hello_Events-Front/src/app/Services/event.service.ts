@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -13,33 +13,46 @@ export class EventService {
     this.apiUrlUser = 'http://localhost:8081/api/user/event';
     this.apiUrlAdmin = 'http://localhost:8081/api/admin';
   }
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('jwt');
+    if (!token) {
+      console.error('No auth token found');
+      return new HttpHeaders();
+    }
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  }
 
-  public getAllEvents():Observable<any> {
-    return this.http.get<any>(`${this.apiUrlUser}/getAll`);
+  public getAllEventsUser():Observable<any> {
+    return this.http.get<any>(`${this.apiUrlUser}/getAll`, { headers: this.getHeaders() });
+  }
+  public getAllEventsAdmin():Observable<any> {
+    return this.http.get<any>(`${this.apiUrlAdmin}/getAllEvents`, { headers: this.getHeaders() });
   }
 
   public saveEvent(event:Event): Observable<any> {
-    return this.http.post<any>(`${this.apiUrlAdmin}/addEvent`,event);
+    return this.http.post<any>(`${this.apiUrlAdmin}/addEvent`,event, { headers: this.getHeaders() });
   }
 
   public updateEvent(event:Event): Observable<any> {
-    return this.http.put<any>(`${this.apiUrlAdmin}/update`,event);
+    return this.http.put<any>(`${this.apiUrlAdmin}/update`,event, { headers: this.getHeaders() });
   }
 
-  public deleteEvent(id:number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrlAdmin}/delete/${id}`);
+  public deleteEvent(id: number | undefined): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrlAdmin}/delete/${id}`, { headers: this.getHeaders() });
   }
 
   public searchByDate(date:string):Observable<any> {
-    return this.http.get<any>(`${this.apiUrlUser}/searchByDate/${date}`);
+    return this.http.get<any>(`${this.apiUrlUser}/searchByDate/${date}`, { headers: this.getHeaders() });
   }
 
   public searchByLocation(location:string):Observable<any> {
-    return this.http.get<any>(`${this.apiUrlUser}/searchByLocation/${location}`);
+    return this.http.get<any>(`${this.apiUrlUser}/searchByLocation/${location}`, { headers: this.getHeaders() });
   }
 
   public searchByCategory(category:string):Observable<any> {
-    return this.http.get<any>(`${this.apiUrlUser}/searchByCategory/${category}`);
+    return this.http.get<any>(`${this.apiUrlUser}/searchByCategory/${category}`, { headers: this.getHeaders() });
   }
 
 }

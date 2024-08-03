@@ -1,10 +1,12 @@
+import {Role} from "./Role";
+
 export class User {
   idUser?:number;
   username: string | undefined;
   password: string|undefined;
   email: string|undefined;
   phone: string|undefined;
-  role: number|undefined;
+  role?:Role;
 
   constructor(data?: Partial<User>) {
     if (data) {

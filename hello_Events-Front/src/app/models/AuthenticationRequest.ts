@@ -1,6 +1,6 @@
 export class AuthenticationRequest {
-  username: string | undefined;
-  password: string|undefined;
+  username?: string;
+  password?: string;
 
 
   constructor(data?: Partial<AuthenticationRequest>) {

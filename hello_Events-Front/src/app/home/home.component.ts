@@ -17,6 +17,8 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatNativeDateModule} from "@angular/material/core";
 import {TicketService} from "../Services/ticket.service";
 import {Ticket} from "../models/Ticket";
+import {Router} from "@angular/router";
+import {routes} from "../app.routes";
 
 @Component({
   selector: 'app-home',
@@ -50,7 +52,8 @@ export class HomeComponent implements OnInit{
 
   constructor(
     private eventService: EventService,
-    private ticketService: TicketService
+    private ticketService: TicketService,
+    private route:Router
   ) {}
 
   ngOnInit(): void {
@@ -58,14 +61,28 @@ export class HomeComponent implements OnInit{
   }
 
   reserveTicket(id: number | undefined) {
-    this.ticket.event_id=id;
-    this.ticketService.saveTicket(this.ticket).subscribe(data=>{
-      console.log(data);
-    });
+    const token = localStorage.getItem("jwt");
+    if (token)
+    {
+      this.ticket.event_id=id;
+      this.ticketService.saveTicket(this.ticket).subscribe(data=>{
+        console.log(data);
+      });
+    }
+    else{
+      this.route.navigateByUrl("/logIn");
+    }
   }
 
   GetEvents(){
-    this.eventService.getAllEvents().subscribe(data => {
+    this.eventService.getAllEventsUser().subscribe(data => {
+      if (data)
+      {
+        console.log("succes")
+      }
+      else {
+        console.log("erreur")
+      }
       this.events = data;
     });
   }
